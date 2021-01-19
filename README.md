@@ -1,2 +1,3 @@
 # SQL-PostgreSQL
-udacity
+
+Udemy lectures  
