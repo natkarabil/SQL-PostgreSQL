@@ -59,3 +59,4 @@ ALTER TABLE `comments` ADD FOREIGN KEY (post_id) REFERENCES `posts` (`id`);
 -- ('','','','');
 -- INSERT INTO `posts` (`id`,`title`) VALUES
 -- ('','');
+
