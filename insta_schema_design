@@ -10,7 +10,9 @@ CREATE TABLE `posts` (
   `created_at` timestamp,
   `updated_at` timestamp,
   `url` VARCHAR(200),
-  `user_id` INTEGER
+  `user_id` INTEGER,
+  `lat` REAL,
+  `lng` REAL
 );
 
 CREATE TABLE `comments` (
@@ -30,6 +32,23 @@ CREATE TABLE `likes` (
   `post_id` INTEGER
 );
 
+CREATE TABLE `photo_tags` (
+  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
+  `created_at` timestamp,
+  `updated_at` TIMESTAMP,
+  `post_id` INTEGER,
+  `used_id` INTEGER,
+  `x` INTEGER,
+  `y` INTEGER
+);
+
+CREATE TABLE `caption_tags` (
+  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
+  `created_at` TIMESTAMP,
+  `post_id` INTEGER,
+  `user_id` INTEGER
+);
+
 ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 ALTER TABLE `comments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
@@ -42,4 +61,10 @@ ALTER TABLE `likes` ADD FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
 
 ALTER TABLE `likes` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
+ALTER TABLE `photo_tags` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
 
+ALTER TABLE `photo_tags` ADD FOREIGN KEY (`used_id`) REFERENCES `users` (`id`);
+
+ALTER TABLE `caption_tags` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
+
+ALTER TABLE `caption_tags` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
