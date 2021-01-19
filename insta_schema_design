@@ -1,0 +1,29 @@
+CREATE TABLE "users" (
+  "id" SERIAL PRIMARY KEY,
+  "created_at" timestamp,
+  "updated_at" timestamp,
+  "username" Varchar(30)
+);
+
+CREATE TABLE "posts" (
+  "id" SERIAL PRIMARY KEY,
+  "created_at" timestamp,
+  "updated_at" timestamp,
+  "url" VARCHAR(200),
+  "user_id" INTEGER
+);
+
+CREATE TABLE "comments" (
+  "id" SERIAL PRIMARY KEY,
+  "created_at" timestamp,
+  "updated_at" timestamp,
+  "contents" VARCHAR(240),
+  "user_id" INTEGER,
+  "post_is" INTEGER
+);
+
+ALTER TABLE "posts" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "comments" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+
+ALTER TABLE "comments" ADD FOREIGN KEY ("post_is") REFERENCES "posts" ("id");
