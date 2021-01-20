@@ -3,6 +3,12 @@ Table users {
   created_at timestamp
   updated_at timestamp
   username Varchar (30)
+  bio VARCHAR (400)
+  avatar VARCHAR (200)
+  phone VARCHAR (25)
+  email VARCHAR (40)
+  password VARCHAR (50)
+  status VARCHAR (15)
 }
 
 Table posts {
