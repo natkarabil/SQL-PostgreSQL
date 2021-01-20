@@ -1,6 +1,6 @@
 # SQL-PostgreSQL
 
-Here I design Istagram Database Schema
+Here I design Instagram Database Schema
 
 Taking course 
 'SQL and PostgreSQL' by Stephen Grider (Engineering Architect)
