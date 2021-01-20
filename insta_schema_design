@@ -1,70 +1,62 @@
-CREATE TABLE `users` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp,
-  `updated_at` timestamp,
-  `username` Varchar(30)
-);
+Table users {
+  id SERIAL [pk, increment]
+  created_at timestamp
+  updated_at timestamp
+  username Varchar (30)
+}
 
-CREATE TABLE `posts` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp,
-  `updated_at` timestamp,
-  `url` VARCHAR(200),
-  `user_id` INTEGER,
-  `lat` REAL,
-  `lng` REAL
-);
+Table posts {
+    id SERIAL [pk, increment] 
+    created_at timestamp
+    updated_at timestamp
+    url VARCHAR (200)
+    user_id INTEGER [ref: > users.id]
+    lat REAL
+    lng REAL
+}
 
-CREATE TABLE `comments` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp,
-  `updated_at` timestamp,
-  `contents` VARCHAR(240),
-  `user_id` INTEGER,
-  `post_is` INTEGER
-);
+Table comments {
+  id SERIAL [pk, increment]
+  created_at timestamp
+  updated_at timestamp
+  contents VARCHAR (240)
+  user_id INTEGER [ref: > users.id]
+  post_is INTEGER [ref: > posts.id]
+}
 
-CREATE TABLE `likes` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp,
-  `user_id` INTEGER,
-  `comment_id` INTEGER,
-  `post_id` INTEGER
-);
+Table likes {
+  id SERIAL [pk, increment]
+  created_at timestamp
+  user_id INTEGER [ref: > users.id]
+  comment_id INTEGER [ref: > comments.id]
+  post_id INTEGER [ref: > posts.id]
+}
 
-CREATE TABLE `photo_tags` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` timestamp,
-  `updated_at` TIMESTAMP,
-  `post_id` INTEGER,
-  `used_id` INTEGER,
-  `x` INTEGER,
-  `y` INTEGER
-);
+Table photo_tags { 
+  id SERIAL [pk, increment]
+  created_at timestamp
+  updated_at TIMESTAMP 
+  post_id INTEGER [ref: > posts.id]
+  used_id INTEGER [ref: > users.id]
+  x INTEGER
+  y INTEGER
+}
 
-CREATE TABLE `caption_tags` (
-  `id` SERIAL PRIMARY KEY AUTO_INCREMENT,
-  `created_at` TIMESTAMP,
-  `post_id` INTEGER,
-  `user_id` INTEGER
-);
+Table caption_tags {
+  id SERIAL [pk,increment]
+  created_at TIMESTAMP
+  post_id INTEGER [ref: > posts.id]
+  user_id INTEGER [ref: > users.id]
+}
 
-ALTER TABLE `posts` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+Table hashtags {
+  id SERIAL [pk, increment]
+  created_at TIMESTAMP
+  title VARCHAR (20)
+}
 
-ALTER TABLE `comments` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `comments` ADD FOREIGN KEY (`post_is`) REFERENCES `posts` (`id`);
-
-ALTER TABLE `likes` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `likes` ADD FOREIGN KEY (`comment_id`) REFERENCES `comments` (`id`);
-
-ALTER TABLE `likes` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
-
-ALTER TABLE `photo_tags` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
-
-ALTER TABLE `photo_tags` ADD FOREIGN KEY (`used_id`) REFERENCES `users` (`id`);
-
-ALTER TABLE `caption_tags` ADD FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`);
-
-ALTER TABLE `caption_tags` ADD FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+Table hashtags_posts {
+  id SERIAL [pk, increment]
+  hashtag_id INTEGER [ref: > hashtags.id]
+  post_id INTEGER [ref: > posts.id]
+}
