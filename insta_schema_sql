@@ -10,7 +10,8 @@ CREATE TABLE users (
 	phone VARCHAR (25),
 	email VARCHAR (50),
 	status VARCHAR (15),
-	CHECK (COALESCE(phone, email) IS NOT NULL);
+	CHECK (COALESCE(phone, email) IS NOT NULL)
+	);
 
 
 -- CREATE TABLE posts
