@@ -1,0 +1,7 @@
+>mkdir ig
+
+>cd ig
+
+>npm init -y
+
+> npm install node-pg-migrate pg
