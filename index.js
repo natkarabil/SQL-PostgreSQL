@@ -17,7 +17,7 @@ app.get('/posts', async (req, res) => {
     SELECT * FROM posts;
   `);
 	
-	 console.log (row);
+	 console.log (rows);
 
   res.send(`
     <table>
